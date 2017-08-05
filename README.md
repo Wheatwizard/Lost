@@ -1,41 +1,14 @@
-# Klein
+# Lost
 
-Klein is a 2 dimensional language that can be embedded on various topological
-surfaces.
-
-# Surfaces
-
-Currently Klein supports 12 distinct topological surfaces.
-A topology is denoted by 3 numbers.  Each of the surfaces is represented by a
-[fundamental square](https://en.wikipedia.org/wiki/Fundamental_polygon).
-
-## First number
-
-The first bit represents which edges the north edge connects to.  If it is 0 the north edge connects to its
-opposite, (that is a pointer moving off the north edge will appear on the south edge and a pointer moving off the west will appear on the east).
-If it is 1 the north edge will be connected to the east edge.
-If it is 2 the north edge connects to the west edge.
-
-The other edges (not the north or the edge it connects to) will connect to each other.
-
-## Third number
-
-*We are going to skip the second number and come back to it hopefully this makes things clearer*
-
-This determines the whether the north edge has the same direction as its match.
-If it is 0 the directions match other wise the directions are opposite.
-
-## Second number
-
-This determines the whether the other pair of edges have the same direction.
-If it is 0 the directions match other wise the directions are opposite.
+Lost is a 2 dimensional language in which the start location and direction are
+entirely random
 
 # Memory
 
 The memory is stored in a stack and a scope.  Both are stacks padded with zeros at the bottom.
 At the end of execution the contents of the stack are printed.
 
-Like most 2D languages the ip starts in the upper lefthand corner moving east.
+Unlike most 2D languages the ip may start in any location moving in any direction.
 
 # Commands
 
@@ -52,6 +25,10 @@ Like most 2D languages the ip starts in the upper lefthand corner moving east.
 - `>` Tells the ip to move east
 
 - `<` Tells the ip to move west
+
+- `v` Tells the ip to move south
+
+- `^` Tells the ip to move north
 
 ## Doors
 
@@ -91,4 +68,8 @@ Like most 2D languages the ip starts in the upper lefthand corner moving east.
 
 ## Control
 
-- `@` Ends execution
+- `%` Turns the safety on
+
+- `#` Turns the safety off
+
+- `@` Ends execution if the safety is on (starts off)
