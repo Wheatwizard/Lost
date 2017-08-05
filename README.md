@@ -68,8 +68,8 @@ Unlike most 2D languages the ip may start in any location moving in any directio
 
 ## Control
 
-- `%` Turns the safety on
+- `%` Turns the safety off
 
-- `#` Turns the safety off
+- `#` Turns the safety on
 
-- `@` Ends execution if the safety is on (starts off)
+- `@` Ends execution if the safety is off (starts on)
