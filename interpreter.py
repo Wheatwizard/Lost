@@ -2,12 +2,15 @@ from Stack import Stack
 from random import randint
 
 class Interpreter(object):
-	def __init__(self,source,input,startx=None,starty=None):
+	def __init__(self,source,input,startx=None,starty=None,dir=None):
 		source = source.strip().split("\n")
 		dim = max(map(len,source)+[len(source)])
 		self.source = [list(x.ljust(dim,"."))for x in source]
 		self.dim = (len(self.source),len(self.source[0]))
-		self.direction = [[1,0],[0,1],[-1,0],[0,-1]][randint(0,3)]
+		if dir == None:
+			self.direction = [[1,0],[0,1],[-1,0],[0,-1]][randint(0,3)]
+		else:
+			self.direction = dir
 		if (startx,starty) == (None,None):
 			self.location = [randint(0,self.dim[0]-1),randint(0,self.dim[1]-1)]
 		else:
