@@ -12,6 +12,13 @@ parser.add_argument(
 	help = "Prints the version number of the interpreter."
 )
 parser.add_argument(
+	"-V",
+	"--verify",
+	action = "store_true",
+	help = "Runs the interpreter in verification mode."
+)
+
+parser.add_argument(
 	"-d",
 	"--debug",
 	action = "store_true",
@@ -91,12 +98,46 @@ if args.debug:
 		a.move()
 		curselib.endwin()
 
+elif args.verify:
+ 	
+	maxX = len(source.strip().split("\n"))
+	maxY = max(map(len,source.strip().split("\n")))
+
+	outputs = []
+
+	for x in range(maxX):
+		for y in range(maxY):
+			for z in [[1,0],[0,1],[-1,0],[0,-1]]:
+				if args.ASCII or args.ASCII_in:
+					a=Interpreter(source,map(ord," ".join(args.input)),x,y,z)
+				else:
+					a=Interpreter(source,map(int,args.input),x,y,z)
+
+				while a.direction != [0,0]:
+					a.action()
+					a.move()
+				print (x,y,z),':',
+
+				if args.ASCII or args.ASCII_out:
+					o = "".join(map(chr,a.memory))
+					
+				else:
+					o = " ".join(map(str,a.memory))
+				outputs.append(o)
+				print o
+	
+	if len(set(outputs)) == 1:
+		print "Deterministic"
+	else:
+		print "Non-deterministic"
+
+
 else:
 	while a.direction != [0,0]:
 		a.action()
 		a.move()
 
-if args.ASCII or args.ASCII_out:
-	print "".join(map(chr,a.memory))
-else:	
-	print " ".join(map(str,a.memory))
+	if args.ASCII or args.ASCII_out:
+		print "".join(map(chr,a.memory))
+	else:	
+		print " ".join(map(str,a.memory))
