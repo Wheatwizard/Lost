@@ -19,6 +19,13 @@ parser.add_argument(
 )
 
 parser.add_argument(
+	"-Q",
+	"--quiet-verification",
+	action = "store_true",
+	help = "Runs in a quieter version of verification mode."
+)
+
+parser.add_argument(
 	"-d",
 	"--debug",
 	action = "store_true",
@@ -98,7 +105,7 @@ if args.debug:
 		a.move()
 		curselib.endwin()
 
-elif args.verify:
+elif args.verify or args.quiet_verification:
  	
 	maxX = len(source.strip().split("\n"))
 	maxY = max(map(len,source.strip().split("\n")))
@@ -116,7 +123,8 @@ elif args.verify:
 				while a.direction != [0,0]:
 					a.action()
 					a.move()
-				print (x,y,z),':',
+				if not args.quiet_verification:
+					print (x,y,z),':',
 
 				if args.ASCII or args.ASCII_out:
 					o = "".join(map(chr,a.memory))
