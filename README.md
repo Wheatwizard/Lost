@@ -8,7 +8,7 @@ entirely random
 The memory is stored in a stack and a scope.  Both are stacks padded with zeros at the bottom.
 At the end of execution the contents of the stack are printed.
 
-Unlike most 2D languages the ip may start in any location moving in any direction.
+Unlike most 2D languages the ip may start in any location moving in any direction. When the ip reaches an edge it will wrap to the other side (like a torus).
 
 # Commands
 
